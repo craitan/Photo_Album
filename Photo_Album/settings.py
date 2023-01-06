@@ -18,6 +18,7 @@ INSTALLED_APPS = [
 
     'Photo_Album.accounts',
     'Photo_Album.common',
+    'Photo_Album.photos',
 
 ]
 
