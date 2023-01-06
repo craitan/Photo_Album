@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <div id="shipping-info">
+        <form enctype="multipart/form-data" method="post" action="{% url 'photo delete' pk=photo.pk %}">
+            <a class="btn btn-outline-dark" href="{% url 'photo view' pk=photo.pk %}">&#x2190; Back to photo</a>
+            <hr>
+            <h2>Are you sure you want to delete the photo?</h2>
+            <hr>
+            <section class="changelist-form-container">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <input id="form-button" class="btn btn-danger" type="submit" value="Delete photo">
+            </section>
+        </form>
+    </div>
+{% endblock %}

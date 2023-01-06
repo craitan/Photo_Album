@@ -1,6 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
 from Photo_Album.core.validators import validate_letters
+
+UserModel = get_user_model()
 
 
 class Category(models.Model):
@@ -19,11 +22,19 @@ class Category(models.Model):
 
 
 class Photo(models.Model):
+
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=False,
+    )
+
     category = models.ForeignKey(
         Category,
         on_delete=models.SET_NULL,
         null=True,
-        blank=False,
+        blank=True,
     )
 
     image = models.ImageField(

@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <div id="shipping-info">
+        <form enctype="multipart/form-data" method="post" action="{% url 'photo edit' pk=photo.pk %}">
+            <a class="btn btn-outline-dark" href="{% url 'photo view' pk=photo.pk %}">&#x2190; Back to photo</a>
+            <hr>
+            <h2>Edit photo</h2>
+            <hr>
+            <section class="changelist-form-container">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <input id="form-button" class="btn btn-success " type="submit" value="Edit photo">
+            </section>
+        </form>
+    </div>
+{% endblock %}

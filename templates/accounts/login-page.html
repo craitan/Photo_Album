@@ -1,17 +1,20 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block content %}
-    <div class="row">
+    <div class="container text-center">
         <form method="post" action="{% url 'login user' %}">
             <h3>Log in</h3>
             <hr>
-            <section class="changelist-form-container">
+            <section class="row-justify-content-center">
                 {{ form.as_p }}
                 {% csrf_token %}
-                <button id="form-button" class="btn  btn-primary"  type="submit" value="Log in">Log in</button>
-            <hr>
+                <button id="form-button" class="btn  btn-primary" type="submit" value="Log in">Log in</button>
+                <hr>
                 <h6>Don't have an account? <a href="{% url 'register user' %}">Register</a></h6>
             </section>
         </form>
     </div>
+
+
+
 {% endblock %}

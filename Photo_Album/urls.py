@@ -1,9 +1,16 @@
-
 from django.contrib import admin
 from django.urls import path, include
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Photo_Album.common.urls')),
     path('account/', include('Photo_Album.accounts.urls')),
+    path('photos/', include('Photo_Album.photos.urls')),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+

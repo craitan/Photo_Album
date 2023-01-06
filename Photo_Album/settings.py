@@ -53,9 +53,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Photo_Album.wsgi.application'
 
-
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -93,11 +90,14 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/images/'
 
-STATICFILES_DIRS = (
-    BASE_DIR / 'staticfiles',
-)
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
 
+MEDIA_ROOT = BASE_DIR / 'static/images'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
