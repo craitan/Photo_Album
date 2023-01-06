@@ -1,20 +1,12 @@
-
-
 from pathlib import Path
-
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 SECRET_KEY = 'django-insecure-(8%8fo7)bh@s3+)f8&gaz0e)sav9z+i=br=go4^jlwb1pvewij'
-
 
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
-
-
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -23,6 +15,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'Photo_Album.accounts',
+
 ]
 
 MIDDLEWARE = [
@@ -61,13 +56,14 @@ WSGI_APPLICATION = 'Photo_Album.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'photo_album',
+        'USER': 'postgres-user',
+        'PASSWORD': 'password',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
-
-
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -84,9 +80,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -95,11 +88,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-
-
 STATIC_URL = 'static/'
 
-
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
