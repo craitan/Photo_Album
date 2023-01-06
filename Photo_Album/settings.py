@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'Photo_Album.accounts',
+    'Photo_Album.common',
 
 ]
 
