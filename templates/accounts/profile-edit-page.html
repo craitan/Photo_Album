@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base/base.html' %}
+{% block content %}
+    <div id="">
+        <form method="post" action="{% url 'edit user' pk=object.pk %}">
+            <a class="btn btn-outline-dark" href="{% url 'details user' pk=user.pk %}">&#x2190; Back to profile</a>
+            <hr>
+            <h3>Edit profile</h3>
+            <hr>
+            <section class="changelist-form-container">
+                {{ form.as_p }}
+                {% csrf_token %}
+                <button id="form-button" class="btn btn-success btn-primary" type="submit" value="Edit">Edit profile
+                </button>
+                <hr>
+            </section>
+        </form>
+    </div>
+{% endblock %}

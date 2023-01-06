@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from Photo_Album.common.models import ContactUs
+
+
+@admin.register(ContactUs)
+class ContactUsAdmin(admin.ModelAdmin):
+    pass

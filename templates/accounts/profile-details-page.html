@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base/base.html' %}
+{% block content %}
 
-</body>
-</html>
+    <div class="box-element">
+        <br>
+        <table class="table">
+            <h3>Profile details</h3>
+            <hr>
+            <tr><h5>User name: <strong>{{ user }}</strong></h5></tr>
+            <tr><h5>Email: <strong>{{ user.email }}</strong></h5></tr>
+            {% if user.first_name %}
+                <tr><h5>First name: <strong>{{ user.first_name|capfirst }}</strong></h5></tr>
+            {% endif %}
+            {% if user.last_name %}
+                <tr><h5>Last name: <strong>{{ user.last_name|capfirst }}</strong></h5></tr>
+            {% endif %}
+            <tr>
+                <a style="float:left; margin:5px;" class="btn btn-success"
+                   href="{% url 'edit user' pk=user.pk %}">Edit</a>
+                <a style="float:left; margin:5px;" class="btn btn-danger"
+                   href="{% url 'delete user' pk=user.pk %}">Delete</a>
+            </tr>
+        </table>
+    </div>
+    <hr>
+{% endblock %}

@@ -43,7 +43,6 @@ class ContactUs(models.Model):
         max_length=MAX_SUBJECT_LENGTH,
         validators=(
             validators.MinLengthValidator(MIN_SUBJECT_LENGTH),
-            validate_letters,
         ),
         null=False,
         blank=False,
@@ -68,3 +67,7 @@ class ContactUs(models.Model):
         null=False,
         blank=False,
     )
+
+
+    def __str__(self):
+        return self.subject
