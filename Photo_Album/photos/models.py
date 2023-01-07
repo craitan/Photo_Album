@@ -11,7 +11,7 @@ class Category(models.Model):
 
     user = models.ForeignKey(
         UserModel,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         null=True,
         blank=False,
     )

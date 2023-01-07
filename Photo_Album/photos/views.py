@@ -1,42 +1,59 @@
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib.auth import mixins as auth_mixins
 
 from Photo_Album.photos.forms import AddPhotoForm, EditPhotoForm
-from Photo_Album.photos.models import Photo
+from Photo_Album.photos.models import Photo, Category
 
 
 class PhotoGalleryView(auth_mixins.LoginRequiredMixin, views.TemplateView):
-    template_name = 'common/home-page.html'
+    template_name = 'common/../../templates/photos/user-gallery-page.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        context['photos'] = Photo.objects.filter(user=user)
+        category = self.request.GET.get('category')
+        if category == None:
+            context['photos'] = Photo.objects.filter(category__user=user)
+        else:
+            context['photos'] = Photo.objects.filter(category__name=category, category__user=user)
+
+        context['categories'] = Category.objects.filter(user=user)
         return context
 
 
-class PhotoAddView(auth_mixins.LoginRequiredMixin, views.CreateView):
-    model = Photo
-    form_class = AddPhotoForm
-    template_name = 'photos/add-photo-page.html'
+def add_photo(request):
+    user = request.user
+    categories = Category.objects.filter(user=user)
 
-    # TODO: HAVE TO figure a way to add the categories
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        user = self.request.user
-        context['categories'] = Photo.objects.filter(user=user)
-        return context
+    if request.method == 'POST':
+        data = request.POST
+        images = request.FILES.getlist('images')
 
-    def form_valid(self, form):
-        photo = form.save(commit=False)
-        photo.user = self.request.user
-        photo.save()
+        if data['category'] != 'none':
+            category = Category.objects.get(id=data['category'])
+        elif data['category_new'] != '':
+            category, created = Category.objects.get_or_create(
+                user=user,
+                name=data['category_new'])
+        else:
+            category = None
 
-        return super(PhotoAddView, self).form_valid(form)
+        for image in images:
+            photo = Photo.objects.create(
+                category=category,
+                user=user,
+                description=data['description'],
+                image=image,
+            )
 
-    def get_success_url(self):
-        return reverse_lazy('home page')
+        return redirect('photo gallery')
+
+    context = {
+        'categories': categories,
+    }
+    return render(request, 'photos/add-photo-page.html', context)
 
 
 class PhotoView(auth_mixins.LoginRequiredMixin, views.DetailView):
@@ -56,4 +73,4 @@ class PhotoEditView(auth_mixins.LoginRequiredMixin, views.UpdateView):
 class PhotoDeleteView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     template_name = 'photos/delete-photo-page.html'
     model = Photo
-    success_url = reverse_lazy('home page')
+    success_url = reverse_lazy('photo gallery')

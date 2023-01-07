@@ -5,7 +5,7 @@ def validate_letters(value):
     min_letters = 3
 
     for ch in value:
-        if not ch.isalpha():
+        if not ch.isalpha() and ch not in [' ']:
             raise exceptions.ValidationError('Only letters are allowed')
 
     if len(value) < min_letters:

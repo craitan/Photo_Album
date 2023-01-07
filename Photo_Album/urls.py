@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Photo_Album.common.urls')),
-    path('account/', include('Photo_Album.accounts.urls')),
+    path('accounts/', include('Photo_Album.accounts.urls')),
     path('photos/', include('Photo_Album.photos.urls')),
 ]
 
