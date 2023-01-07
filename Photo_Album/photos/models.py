@@ -8,6 +8,14 @@ UserModel = get_user_model()
 
 class Category(models.Model):
     MAX_LEN_NAME = 100
+
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=False,
+    )
+
     name = models.CharField(
         max_length=MAX_LEN_NAME,
         validators=(
@@ -22,7 +30,6 @@ class Category(models.Model):
 
 
 class Photo(models.Model):
-
     user = models.ForeignKey(
         UserModel,
         on_delete=models.CASCADE,

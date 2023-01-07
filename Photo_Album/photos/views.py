@@ -23,7 +23,10 @@ class PhotoAddView(auth_mixins.LoginRequiredMixin, views.CreateView):
 
     # TODO: HAVE TO figure a way to add the categories
     def get_context_data(self, **kwargs):
-        pass
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        context['categories'] = Photo.objects.filter(user=user)
+        return context
 
     def form_valid(self, form):
         photo = form.save(commit=False)
