@@ -2,22 +2,25 @@
 {% block content %}
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col col-lg-6g">
-                <a href="{% url 'photo gallery' %}" class="btn btn-dark my-3">Go Back</a>
-                <a class="btn btn-outline-danger" href="{% url 'photo delete' pk=photo.pk %}">Delete
-                    photo</a>
+            <div class="col col-lg-8">
                 <div style="height: 100vh;">
                     <img class="box-element" style="max-width: 80%; max-height: 80%;" src="{{ photo.image.url }}">
                     <div>
-                        <hr style="margin-right: 640px">
+                        <hr style="margin-right: 660px">
                     </div>
-                    <h3>Description</h3>
+
+                </div>
+            </div>
+            <div class="col col-lg-6g">
+                <h3>Description</h3>
                     <div class="card w-50">
                         <div class="card-body">
                             {{ photo.description }}
                         </div>
                     </div>
-                </div>
+                <a href="{% url 'photo gallery' %}" class="btn btn-dark my-3">Go Back</a>
+                <a class="btn btn-outline-danger" href="{% url 'photo delete' pk=photo.pk %}">Delete
+                    photo</a>
             </div>
         </div>
     </div>

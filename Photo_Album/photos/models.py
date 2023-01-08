@@ -30,6 +30,7 @@ class Category(models.Model):
 
 
 class Photo(models.Model):
+    MAX_LEN_DESCRIPTION = 100
     user = models.ForeignKey(
         UserModel,
         on_delete=models.CASCADE,
@@ -49,4 +50,6 @@ class Photo(models.Model):
         blank=False,
     )
 
-    description = models.TextField()
+    description = models.TextField(
+        max_length=MAX_LEN_DESCRIPTION,
+    )
