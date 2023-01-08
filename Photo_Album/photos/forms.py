@@ -9,8 +9,3 @@ class AddPhotoForm(AddPlaceholdersMixin, RemoveLabelsMixin, forms.ModelForm):
         model = Photo
         exclude = ('user',)
 
-#TODO: WILL REMOVE EDIT
-class EditPhotoForm(AddPlaceholdersMixin, RemoveLabelsMixin, forms.ModelForm):
-    class Meta:
-        model = Photo
-        exclude = ('user',)
