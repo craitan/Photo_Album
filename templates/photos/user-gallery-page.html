@@ -6,8 +6,12 @@
         <div class="row">
             <div class="col-md-3">
                 {% if request.user.is_authenticated %}
-{#                    TODO: make this look better wit bootstrap and make it link to profile #}
-                <p>Hello {{request.user}}</p>
+
+                    <div class="card  mb-3">
+                        <div class="card-header">
+                            <h4>Hello {{ request.user|capfirst }}.</h4>
+                        </div>
+                    </div>
                 {% endif %}
                 <div class="card">
                     <div class="card-header">
@@ -18,11 +22,15 @@
                             <a href="{% url 'photo gallery' %}">All</a>
                         </li>
                         {% for category in categories %}
-                        <li class=" list-group-item">
-                            <a href="{% url 'photo gallery' %}?category={{category}}">
-                                {{category}}
-                            </a>
-                        </li>
+                            <li class=" list-group-item">
+                                <a href="{% url 'photo gallery' %}?category={{ category }}">
+                                    {{ category }}
+                                </a>
+                                <a style="margin-left: 110px"
+                                   href="{% url 'category delete' pk=category.pk %}?category={{ category }}">
+                                    Remove
+                                </a>
+                            </li>
                         {% endfor %}
                         <a href="{% url 'photo add' %}" class="btn btn-dark btn-block btn-sm m-1">Add Photo</a>
                         <a href="{% url 'logout user' %}" class="btn btn-dark btn-block btn-sm m-1">Logout</a>
@@ -33,23 +41,20 @@
             <div class="col-md-9">
                 <div class="row">
                     {% for photo in photos %}
-                    <div class="col-md-4">
-                        <div class="card my-2">
-                            <img class="image-thumbnail" src="{{photo.image.url}}" alt="Card image cap">
-
-                            <div class="card-body">
-                                <small>Category: {{photo.category.name}}</small>
-                                <p class="crop">
-                                    <small>Description: {{photo.description}}</small>
-                                </p>
+                        <div class="col-md-4">
+                            <div class="card my-2">
+                                <img class="image-thumbnail" src="{{ photo.image.url }}" alt="Card image cap">
+                                <div class="card-body">
+                                    <small>Category: {{ photo.category.name }}</small>
+                                    <p class="crop">
+                                        <small>Description: {{ photo.description }}</small>
+                                    </p>
+                                </div>
+                                <a href="{% url 'photo view' pk=photo.pk %}" class="btn btn-outline-dark btn-sm m-1">View</a>
                             </div>
-
-
-                            <a href="{% url 'photo view' pk=photo.pk %}" class="btn btn-outline-dark btn-sm m-1">View</a>
                         </div>
-                    </div>
                     {% empty %}
-                    <h3>No photos...</h3>
+                        <h3>No photos...</h3>
                     {% endfor %}
                 </div>
             </div>

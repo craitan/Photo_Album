@@ -14,7 +14,7 @@ class HomePageView(views.TemplateView):
         context = super().get_context_data(**kwargs)
         photos = Photo.objects.all()
         page = self.request.GET.get('page')
-        context['photos'] = Paginator(photos, 3).get_page(page)
+        context['photos'] = Paginator(photos, 6).get_page(page)
 
         return context
 

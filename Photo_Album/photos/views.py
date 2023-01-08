@@ -1,8 +1,8 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib.auth import mixins as auth_mixins
-
 
 from Photo_Album.photos.models import Photo, Category
 
@@ -23,6 +23,7 @@ class PhotoGalleryView(auth_mixins.LoginRequiredMixin, views.TemplateView):
         return context
 
 
+@login_required(login_url='login user')
 def add_photo(request):
     user = request.user
     categories = Category.objects.filter(user=user)
@@ -57,7 +58,6 @@ def add_photo(request):
 
 
 class PhotoView(auth_mixins.LoginRequiredMixin, views.DetailView):
-
     template_name = 'photos/photo-view.html'
     model = Photo
 
@@ -65,4 +65,10 @@ class PhotoView(auth_mixins.LoginRequiredMixin, views.DetailView):
 class PhotoDeleteView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     template_name = 'photos/delete-photo-page.html'
     model = Photo
+    success_url = reverse_lazy('photo gallery')
+
+
+class CategoryDeleteView(auth_mixins.LoginRequiredMixin, views.DeleteView):
+    template_name = 'photos/delete-category-page.html'
+    model = Category
     success_url = reverse_lazy('photo gallery')
