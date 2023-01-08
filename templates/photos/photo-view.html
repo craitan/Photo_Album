@@ -7,7 +7,12 @@
                 <a class="btn btn-outline-danger" href="{% url 'photo delete' pk=photo.pk %}">Delete
                     photo</a>
                 <div style="height: 100vh;">
-                    <img class="box-element" style="max-width: 70%; max-height: 70%;" src="{{ photo.image.url }}">
+                    <img class="box-element" style="max-width: 80%; max-height: 80%;" src="{{ photo.image.url }}">
+                    <div class="row justify-content-center">
+                        <p>
+                        {{ photo.description }}
+                    </p>
+                    </div>
                 </div>
             </div>
         </div>

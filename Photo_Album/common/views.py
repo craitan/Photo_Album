@@ -3,10 +3,18 @@ from django.views import generic as views
 
 from Photo_Album.common.forms import ContactUsForm
 from Photo_Album.common.models import ContactUs
+from Photo_Album.photos.models import Photo
 
 
 class HomePageView(views.TemplateView):
     template_name = 'common/home-page.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        photos = Photo.objects.all()
+        context['photos'] = photos
+
+        return context
 
 
 class ContactView(views.FormView):

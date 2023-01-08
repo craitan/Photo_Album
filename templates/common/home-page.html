@@ -1,4 +1,25 @@
 {% extends 'base/base.html' %}
 {% block content %}
     <h1>THIS IS THE NEW HOME PAGE THAT I HAVE ADD THINGS TO</h1>
+    <div class="col-md-9">
+                <div class="row">
+
+                    {% for photo in photos %}
+                    <div class="col-md-4">
+                        <div class="card my-2">
+                            <img class="image-thumbail" src="{{photo.image.url}}" alt="Card image cap">
+
+                            <div class="card-body">
+                                <small>Category: {{photo.category.name}}</small>
+                                <p>
+                                    <small>By: {{photo.user}}</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <h3>No photos...</h3>
+                    {% endfor %}
+                </div>
+            </div>
 {% endblock %}
