@@ -57,6 +57,7 @@ def add_photo(request):
 
 
 class PhotoView(auth_mixins.LoginRequiredMixin, views.DetailView):
+
     template_name = 'photos/photo-view.html'
     model = Photo
 
