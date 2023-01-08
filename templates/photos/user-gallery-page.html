@@ -6,6 +6,7 @@
         <div class="row">
             <div class="col-md-3">
                 {% if request.user.is_authenticated %}
+{#                    TODO: make this look better wit bootstrap and make it link to profile #}
                 <p>Hello {{request.user}}</p>
                 {% endif %}
                 <div class="card">
@@ -38,9 +39,13 @@
 
                             <div class="card-body">
                                 <small>Category: {{photo.category.name}}</small>
+                                <p class="crop">
+                                    <small>Description: {{photo.description}}</small>
+                                </p>
                             </div>
 
-                            <a href="{% url 'photo view' photo.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
+
+                            <a href="{% url 'photo view' pk=photo.pk %}" class="btn btn-outline-dark btn-sm m-1">View</a>
                         </div>
                     </div>
                     {% empty %}

@@ -39,6 +39,8 @@ class SignOutView(auth_views.LogoutView):
     next_page = reverse_lazy('home page')
 
 
+# TODO: have to fix this so other people cant see pictures
+
 class UserDetailsView(auth_mixins.LoginRequiredMixin, views.DetailView):
     template_name = 'accounts/profile-details-page.html'
     model = UserModel

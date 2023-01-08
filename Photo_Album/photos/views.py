@@ -3,19 +3,19 @@ from django.urls import reverse_lazy
 from django.views import generic as views
 from django.contrib.auth import mixins as auth_mixins
 
-from Photo_Album.photos.forms import AddPhotoForm, EditPhotoForm
+from Photo_Album.photos.forms import EditPhotoForm
 from Photo_Album.photos.models import Photo, Category
 
 
 class PhotoGalleryView(auth_mixins.LoginRequiredMixin, views.TemplateView):
-    template_name = 'common/../../templates/photos/user-gallery-page.html'
+    template_name = 'photos/user-gallery-page.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         category = self.request.GET.get('category')
         if category == None:
-            context['photos'] = Photo.objects.filter(category__user=user)
+            context['photos'] = Photo.objects.filter(user=user)
         else:
             context['photos'] = Photo.objects.filter(category__name=category, category__user=user)
 

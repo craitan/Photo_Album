@@ -1,25 +1,59 @@
 {% extends 'base/base.html' %}
 {% block content %}
-    <h1>THIS IS THE NEW HOME PAGE THAT I HAVE ADD THINGS TO</h1>
-    <div class="col-md-9">
-                <div class="row">
-
-                    {% for photo in photos %}
-                    <div class="col-md-4">
-                        <div class="card my-2">
-                            <img class="image-thumbail" src="{{photo.image.url}}" alt="Card image cap">
-
-                            <div class="card-body">
-                                <small>Category: {{photo.category.name}}</small>
-                                <p>
-                                    <small>By: {{photo.user}}</small>
-                                </p>
-                            </div>
+    <div style="margin-bottom: 50px">
+    <h1 style="text-align: center">Find your inspiration.</h1>
+    <h3 style="text-align: center">Join the Memory Catcher
+        community, home to tens of billions of photos.</h3>
+    </div>
+    <div class="col-md-10">
+        <div class="row">
+            {% for photo in photos %}
+                <div class="col-md-4">
+                    <div class="card my-2">
+                        <img class="image-thumbail" src="{{ photo.image.url }}" alt="Card image cap">
+                        <div class="card-body">
+                            <p>
+                                <small>By: {{ photo.user }}</small>
+                            </p>
                         </div>
                     </div>
-                    {% empty %}
-                    <h3>No photos...</h3>
-                    {% endfor %}
                 </div>
+            {% empty %}
+                <h3>No photos...</h3>
+            {% endfor %}
+        </div>
+        {% if photos.object_list %}
+            <div class="pagination">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        {% if photos.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="{% url 'home page' %}?page={{ photos.previous_page_number }}">Previous</a>
+                            </li>
+                        {% endif %}
+                        {% for num_page in photos.paginator.page_range %}
+                            {% if photos.number == num_page %}
+                                <li class="page-item active" aria-current="page">
+                                    <a class="page-link"
+                                       href="{% url 'home page' %}?page={{ num_page }}">{{ num_page }}</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item" aria-current="page">
+                                    <a class="page-link"
+                                       href="{% url 'home page' %}?page={{ num_page }}">{{ num_page }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if photos.has_next %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="{% url 'home page' %}?page={{ photos.next_page_number }}">Next</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
             </div>
+        {% endif %}
+    </div>
 {% endblock %}

@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render
 from django.views import generic as views
 
@@ -12,7 +13,8 @@ class HomePageView(views.TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         photos = Photo.objects.all()
-        context['photos'] = photos
+        page = self.request.GET.get('page')
+        context['photos'] = Paginator(photos, 3).get_page(page)
 
         return context
 
