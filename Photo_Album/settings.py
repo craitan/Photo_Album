@@ -71,8 +71,8 @@ DATABASES = {
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379',
+        'BACKEND': os.environ.get('CACHE_BACKEND'),
+        'LOCATION': os.environ.get('CACHE_LOCATION'),
     }
 }
 
@@ -118,9 +118,9 @@ AUTH_USER_MODEL = 'accounts.AppUser'
 
 AWS_QUERYSTRING_AUTH = False
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = os.environ.get('DEFAULT_FILE_STORAGE')
 
-AWS_ACCESS_KEY_ID = 'AKIA3SLA47UTTMFCE4PF'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
-AWS_STORAGE_BUCKET_NAME = 'memorycatcher'
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
