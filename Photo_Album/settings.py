@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'Photo_Album.common',
     'Photo_Album.photos',
 
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -102,3 +103,14 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.AppUser'
+
+
+AWS_QUERYSTRING_AUTH = False
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY_ID = 'AKIA3SLA47UTTMFCE4PF'
+AWS_SECRET_ACCESS_KEY = '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'
+
+AWS_STORAGE_BUCKET_NAME = 'memorycatcher'
+

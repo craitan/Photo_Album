@@ -30,7 +30,7 @@ class Category(models.Model):
 
 
 class Photo(models.Model):
-    MAX_LEN_DESCRIPTION = 100
+    MAX_LEN_DESCRIPTION = 50
     user = models.ForeignKey(
         UserModel,
         on_delete=models.CASCADE,
