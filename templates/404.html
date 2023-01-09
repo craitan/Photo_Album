@@ -1,4 +1,20 @@
 {% extends 'base/base.html' %}
 {% block content %}
-    Error !!!
+<div class="wrapper">
+    <div class="container">
+        <div class="grid-row">
+            <div class="colmun colmun-left">
+
+                <h1 class="px-spc-b-20">Sorry we can't find the page you are looking for.</h1>
+                <span class="px-spc-b-20">This page has been relocated or removed.</span>
+
+
+            </div>
+            <hr>
+            <div class="colmun colmun-right">
+            <a class="btn btn-outline-dark" href="{% url 'home page' %}">&#x2190; Back</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

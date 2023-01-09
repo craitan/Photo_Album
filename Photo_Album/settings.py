@@ -6,7 +6,10 @@ SECRET_KEY = 'django-insecure-(8%8fo7)bh@s3+)f8&gaz0e)sav9z+i=br=go4^jlwb1pvewij
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -64,6 +67,14 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379',
+    }
+}
+
 if DEBUG:
     pass
 else:
@@ -104,7 +115,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.AppUser'
 
-
 AWS_QUERYSTRING_AUTH = False
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
@@ -113,4 +123,3 @@ AWS_ACCESS_KEY_ID = 'AKIA3SLA47UTTMFCE4PF'
 AWS_SECRET_ACCESS_KEY = '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'
 
 AWS_STORAGE_BUCKET_NAME = 'memorycatcher'
-
