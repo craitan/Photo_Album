@@ -10,6 +10,7 @@ from Photo_Album.photos.models import Photo
 class HomePageView(views.TemplateView):
     template_name = 'common/home-page.html'
 
+    # TODO: want to show 6 random photos from all the photos uploaded from all users
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         photos = Photo.objects.order_by('pk').all()
