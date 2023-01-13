@@ -2,11 +2,14 @@ import os
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = 'django-insecure-(8%8fo7)bh@s3+)f8&gaz0e)sav9z+i=br=go4^jlwb1pvewij'
 
-DEBUG = bool(int(os.environ.get('DEBUG', 0)))
+DEBUG = False
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(' ')
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+]
 
 
 INSTALLED_APPS = [
@@ -115,9 +118,9 @@ AUTH_USER_MODEL = 'accounts.AppUser'
 
 AWS_QUERYSTRING_AUTH = False
 
-DEFAULT_FILE_STORAGE = os.environ.get('DEFAULT_FILE_STORAGE')
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_ACCESS_KEY_ID = 'AKIA3SLA47UTTMFCE4PF'
+AWS_SECRET_ACCESS_KEY = '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'
 
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_STORAGE_BUCKET_NAME = 'memorycatcher'
