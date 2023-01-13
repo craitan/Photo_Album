@@ -14,7 +14,7 @@ class PhotoGalleryView(auth_mixins.LoginRequiredMixin, views.TemplateView):
         context = super().get_context_data(**kwargs)
         user = self.request.user
         category = self.request.GET.get('category')
-        if category == None:
+        if category is None:
             context['photos'] = Photo.objects.filter(user=user)
         else:
             context['photos'] = Photo.objects.filter(category__name=category, category__user=user)
@@ -23,7 +23,7 @@ class PhotoGalleryView(auth_mixins.LoginRequiredMixin, views.TemplateView):
         return context
 
 
-@login_required(login_url='login user')
+@login_required
 def add_photo(request):
     user = request.user
     categories = Category.objects.filter(user=user)

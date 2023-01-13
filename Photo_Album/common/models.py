@@ -71,3 +71,4 @@ class ContactUs(models.Model):
 
     def __str__(self):
         return self.subject
+

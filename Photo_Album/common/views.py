@@ -27,3 +27,6 @@ class ContactView(views.FormView):
     def form_valid(self, form):
         form.save()
         return render(self.request, 'common/contact-submitted.html')
+
+
+

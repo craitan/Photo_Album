@@ -1,16 +1,13 @@
 import os
 from pathlib import Path
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-DEBUG = int(os.environ.get('DEBUG', 1))
+DEBUG = bool(int(os.environ.get('DEBUG', 0)))
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-]
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(' ')
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -60,21 +57,21 @@ WSGI_APPLICATION = 'Photo_Album.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('DB_ENGINE'),
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'photo_album',
+        'USER': 'postgres-user',
+        'PASSWORD': 'password',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
-CACHES = {
-    'default': {
-        'BACKEND': os.environ.get('CACHE_BACKEND'),
-        'LOCATION': os.environ.get('CACHE_LOCATION'),
-    }
-}
+# CACHES = {
+#     'default': {
+#         'BACKEND': os.environ.get('CACHE_BACKEND'),
+#         'LOCATION': os.environ.get('CACHE_LOCATION'),
+#     }
+# }
 
 if DEBUG:
     pass
