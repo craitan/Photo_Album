@@ -134,5 +134,3 @@ dmypy.json
 postgresql/
 postgres1/
 .idea
-docker-compose.prod.yml
-docker-compose.yml

@@ -1,0 +1,43 @@
+version: '3.4'
+
+services:
+  web:
+    image: craitan/photo_album-web
+    build: .
+    command: gunicorn Photo_Album.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./staticfiles:/tmp/Photo_album/staticfiles
+    ports:
+      - 8000:8000
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres-user
+      POSTGRES_DB: photo_album
+      PGDATA: /var/lib/postgres1/data/pgdata
+    volumes:
+      - ./postgres1:/var/lib/postgres1/data/pgdata
+  nginx:
+    image: nginx
+    ports:
+      - 81:80
+      - 443:443
+    volumes:
+      - ./staticfiles:/home/app/web/staticfiles
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/logs:/var/log/nginx
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
+    depends_on:
+      - web
+volumes:
+  postgres1:
+    driver: local
