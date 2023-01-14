@@ -103,6 +103,7 @@ celerybeat.pid
 
 # Environments
 .env
+.env.prod
 .venv
 env/
 envs
@@ -131,5 +132,7 @@ dmypy.json
 
 
 postgresql/
-
+postgres1/
 .idea
+docker-compose.prod.yml
+docker-compose.yml

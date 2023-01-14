@@ -21,9 +21,9 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_USER: postgres-user
       POSTGRES_DB: photo_album
-      PGDATA: /var/lib/postgres/data/pgdata
+      PGDATA: /var/lib/postgres1/data/pgdata
     volumes:
-      - ./postgres:/var/lib/postgresql/data/pgdata
+      - ./postgres1:/var/lib/postgres1/data/pgdata
 volumes:
-  postgres:
+  postgres1:
     driver: local
