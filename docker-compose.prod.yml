@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   web:
-    image: craitan/photo_album-web
+    image: craitan/photo-album
     build: .
     command: gunicorn Photo_Album.wsgi:application --bind 0.0.0.0:8000
     volumes:
@@ -28,7 +28,7 @@ services:
   nginx:
     image: nginx
     ports:
-      - 81:80
+      - 80:80
       - 443:443
     volumes:
       - ./staticfiles:/home/app/web/staticfiles
