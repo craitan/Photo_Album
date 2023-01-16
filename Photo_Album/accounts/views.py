@@ -13,7 +13,7 @@ UserModel = get_user_model()
 class SignUpView(views.CreateView):
     template_name = 'accounts/register-page.html'
     form_class = UserCreateForm
-    success_url = reverse_lazy('home page')
+    success_url = reverse_lazy('photo gallery')
 
     def form_valid(self, form):
         form.save()
@@ -32,7 +32,7 @@ class SignInView(auth_views.LoginView):
     form_class = LoginForm
 
     def get_success_url(self):
-        return reverse_lazy('home page')
+        return reverse_lazy('photo gallery')
 
 
 class SignOutView(auth_views.LogoutView):
