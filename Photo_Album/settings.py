@@ -15,6 +15,8 @@ SECRET_KEY = env('SECRET_KEY')
 print(SECRET_KEY)
 ALLOWED_HOSTS = env('ALLOWED_HOSTS').split(' ')
 
+CSRF_TRUSTED_ORIGINS = [f'https://{x}' for x in ALLOWED_HOSTS]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
