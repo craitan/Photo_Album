@@ -6,7 +6,7 @@ Final project for the Web Framework Course in Software University.<br>
 <a href='https://dream-catcher.online/'> Click here to see the deployed project </a>
 <br><br>
 
-[About](#about) | [Installation](#installation) | [Urls](#urls) | [Credits](#credits) | [License](#license)
+[About](#about) | [Installation](#installation) | [Urls](#urls) | [License](#license)
 
 </h3>
 	 
@@ -109,3 +109,62 @@ AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY'), # Change to valid AWS b
 
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME'), # Change to valid AWS storage bucket name or set it up in .env file
 ```
+
+<!-- URLS -->
+## Urls
+
+<h4>The application integrates the following urls for each application:</h4>
+
+<h4>Main urls:</h4>
+	
+```python
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('Photo_Album.common.urls')),
+    path('accounts/', include('Photo_Album.accounts.urls')),
+    path('photos/', include('Photo_Album.photos.urls')),
+]
+```
+<h4>Common:</h4>
+	
+```python
+urlpatterns = (
+    path('', (HomePageView.as_view()), name='home page'),
+    path('contact-us/', ContactView.as_view(), name='contact us')
+)
+```
+<h4>Accounts:</h4>
+	
+```python
+urlpatterns = (
+    path('register/', SignUpView.as_view(), name="register user"),
+    path('login/', SignInView.as_view(), name='login user'),
+    path('logout/', SignOutView.as_view(), name='logout user'),
+    path('profile/<int:pk>/', include([
+        path('', UserDetailsView.as_view(), name='details user'),
+        path('edit/', UserEditView.as_view(), name='edit user'),
+        path('delete/', UserDeleteView.as_view(), name='delete user'),
+
+    ]))
+)
+```
+<h4>Photos:</h4>
+	
+```python
+urlpatterns = (
+    path('', PhotoGalleryView.as_view(), name='photo gallery'),
+    path('add/', add_photo, name='photo add'),
+    path('view/<int:pk>', PhotoView.as_view(), name='photo view'),
+    path('delete/<int:pk>', PhotoDeleteView.as_view(), name='photo delete'),
+    path('category/<int:pk>', CategoryDeleteView.as_view(), name='category delete'),
+
+)
+```
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the [MIT](https://github.com/craitan/Photo_Album/blob/new_branch/License.md) License.
+
+
