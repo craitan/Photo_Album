@@ -134,3 +134,5 @@ dmypy.json
 postgresql/
 postgres1/
 .idea
+staticfiles
+static
